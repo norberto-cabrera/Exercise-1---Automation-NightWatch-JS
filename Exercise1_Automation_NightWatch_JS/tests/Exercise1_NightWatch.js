@@ -9,13 +9,26 @@ module.exports = {
         .pause(1000)
 
         //2.-Click on register. (The page has changed so I click on Join now)
-        .click('body:nth-child(2) nav.nav:nth-child(1) div.nav__cta-container div.join-with-resume--flow-b > a.nav__button-tertiary.nav__button-tertiary--no-margin-right:nth-child(1)')
+                              //body:nth-child(2) nav.nav:nth-child(1) div.nav__cta-container div.join-with-resume--flow-b > a.nav__button-tertiary.nav__button-tertiary--no-margin-right:nth-child(1) 
+        browser.useXpath();
+        browser.waitForElementVisible("//a[contains(text(),'Join now')]")
+        //.waitForElementVisible('body:nth-child(2) nav.nav:nth-child(1) div.nav__cta-container div.join-with-resume--flow-b > a.nav__button-tertiary.nav__button-tertiary--no-margin-right:nth-child(1)', 4000)
+        browser.click("//a[contains(text(),'Join now')]")
+        //.click('body:nth-child(2) nav.nav:nth-child(1) div.nav__cta-container div.join-with-resume--flow-b > a.nav__button-tertiary.nav__button-tertiary--no-margin-right:nth-child(1)')
+        .pause(3000)
+        
 
+        
         //3.-Verify this text is present: Get started - it's free. (Make the most of your professional life)
-        .assert.containsText("div.page.page--is-nux-design:nth-child(1) main.main form.join-form:nth-child(9) header.main__header > h1.main__subtitle.main__subtitle--is-cold-join","Make the most of your professional life")
+        .waitForElementVisible("//h1[contains(text(),'Make the most of your professional life')]")
+        //browser.waitForElementVisible("div.page.page--is-nux-design:nth-child(1) main.main form.join-form:nth-child(9) header.main__header > h1.main__subtitle.main__subtitle--is-cold-join","Make the most of your professional life", 1000)
+        //.assert.containsText("div.page.page--is-nux-design:nth-child(1) main.main form.join-form:nth-child(9) header.main__header > h1.main__subtitle.main__subtitle--is-cold-join","Make the most of your professional life")
+        .assert.containsText("//h1[contains(text(),'Make the most of your professional life')]","Make the most of your professional life")
+        browser.useCss();
+        
         
         //4.-Click on Join now. (Agree & Join)
-        .waitForElementVisible('#join-form-submit', 1000)
+        browser.waitForElementVisible('#join-form-submit', 1000)
         .click('#join-form-submit')
         .pause(3000)
         
